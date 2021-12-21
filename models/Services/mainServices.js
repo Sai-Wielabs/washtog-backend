@@ -13,9 +13,7 @@ const mainServiceSchema = new Schema({
 
     required: true,
   },
-  id:{
-      type:String,
-  }
+
 });
 
 const MainServicesSchema = mongoose.model(

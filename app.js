@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
+const swaggerUI = require("swagger-ui-express");
 
 //routes
 const userRoute = require("../Washtog_backend/routes/user");
@@ -10,10 +11,15 @@ const popularItemsRoute = require("../Washtog_backend/routes/popularItems");
 const reviewsRoute = require("../Washtog_backend/routes/reviews");
 const serviceRoute = require("../Washtog_backend/routes/services");
 const addsRouter = require("../Washtog_backend/routes/adds");
+
+const docs = require("../Washtog_backend/docs");
+swaggerDocument = require("./swagger.json");
+
 //config env
 require("dotenv").config();
 
 //Connect to DB
+
 let dbURI = process.env.DB_CONNECTION_DEV;
 // if (process.env.NODE_ENV === "development") {
 //   dbURI = process.env.DB_CONNECTION_DEV;
@@ -21,6 +27,8 @@ let dbURI = process.env.DB_CONNECTION_DEV;
 // if (process.env.NODE_ENV === "production") {
 //   dbURI = process.env.DB_CONNECTION_PROD;
 // }
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 mongoose.connect(
   dbURI,
@@ -37,6 +45,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+//swager
 
 //routes
 app.use("/api/v1", userRoute);

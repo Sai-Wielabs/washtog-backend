@@ -10,9 +10,12 @@ const mostPopularSchema = new Schema({
         required : true,
     },
     service : {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required : true,
-        ref : "services"
+    },
+    image_url : {
+        type : String,
+        required : true,
     }
   
 });

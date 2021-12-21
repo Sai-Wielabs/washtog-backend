@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Washtog",
+    "description": "My User Project Application API"
+  },
+  "host": "localhost:2323",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Washtog",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "paths": {
+    "/api/v1/reviews/getReviews": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reviews"
+            }
+          },
+          "501": {
+            "description": "internaal server error"
+          }
+        }
+      }
+    },
+    "api/v1/reviews/addReview": {
+      "post": {
+        "tags": ["Add a review"],
+        "summary": "Get a individual review",
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/addReview"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "reviews": {
+      "required": ["service_id", "posted_by", "rating"],
+      "properties": {
+        "service_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+
+        "posted_by": {
+          "type": "string"
+        },
+        "user_image_url": {
+          "type": "String"
+        },
+        "rating": {
+          "type": "string"
+        }
+      }
+    },
+    "addReview": {
+      "required": ["posted_by"],
+      "parameters": [
+        {
+          "name": "user",
+          "in": "body",
+          "description": "User that we want to create"
+          
+        }
+      ]
+    }
+  }
+}

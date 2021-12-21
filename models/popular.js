@@ -7,14 +7,19 @@ const popularItemsSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
+  imageUrl: {
     type: String,
     required: true,
   },
-  discount : String,
+  discount: {
+    type:String,
+    required : true,
+  },
+  serviceId: {
+    type: String,
+    required: true,
+  },
 });
 
- 
 const PopularItems = mongoose.model("PopularItems", popularItemsSchema);
 module.exports = PopularItems;
-

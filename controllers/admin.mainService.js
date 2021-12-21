@@ -1,30 +1,35 @@
 const MainServicesSchema = require("../models/Services/mainServices");
-const CustomPackagesSchema = require("../models/services/customPackages");
+const FloorScrubbingSchema = require("../models/Services/floorScrubbing")
 
 const addMainService = async (req, res) => {
-  const addedSub = await new CustomPackagesSchema(
+  const addedSub = await new FloorScrubbingSchema(
     req.body.servicesOffered[0]
   ).save();
   try {
-    const isExist = await MainServicesSchema.findOne({ id: req.body.id });
-    if (!isExist) {
-      req.body.servicesOffered = [addedSub._id];
+    const mainservice = await MainServicesSchema.findById("61c066a343f53e8cb8653be3");
 
-      const addedService = await new MainServicesSchema(req.body).save();
-      console.log(addedService);
+    mainservice.servicesOffered = [...mainservice.servicesOffered , addedSub["_id"]]
+
+    await MainServicesSchema.findByIdAndUpdate("61c066a343f53e8cb8653be3",mainservice);
+
+    console.log(await MainServicesSchema.find());
+    
+    
+
+    // const addedService = await new MainServicesSchema.findByIdAndUpdate("61c066a343f53e8cb8653be3",{
+    //   "servicesOffered" : addedSub,
+    // });
+    // console.log(addedService);
+   
+    // req.body.servicesOffered = [addedSub._id];
+
 
       return res.status(200).send({
         status: "success",
         message: "successfully added a service",
         content: "",
       });
-    } else {
-      return res.status(409).send({
-        ststus: "success",
-        message: "service already existed",
-        content: null,
-      });
-    }
+ 
   } catch (error) {
     console.log(error);
     return res.status(500).send({
@@ -38,7 +43,7 @@ const addMainService = async (req, res) => {
 const getServices = async (req, res) => {
   try {
     const serviceId = req.body.id;
-    const service = await CustomPackagesSchema.findById(serviceId);
+    const service = await CustomPackage.findById(serviceId);
     if (service) {
       console.log(service);
       return res.status(200).send({
