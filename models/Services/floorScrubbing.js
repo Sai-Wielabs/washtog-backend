@@ -15,7 +15,7 @@ const floorScrubbingSchema = new Schema({
     type: Array,
     required: true,
   },
-  imgUrl: {
+  imageUrl: {
     type: String,
     required: true,
   },

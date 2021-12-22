@@ -5,7 +5,7 @@ const getPopularItems = async (req, res) => {
   try {
     const populatItems = await PopularItems.find();
 
-    console.log(populatItems);
+
     return res.status(200).send(populatItems);
   } catch (error) {
     return res.status(500).send({

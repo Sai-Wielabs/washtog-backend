@@ -2,7 +2,6 @@ const Addschema = require("../models/Adds/add");
 const getAdds = async (req, res) => {
   try {
     const adds = await Addschema.find();
-    console.log(adds);
     return res.status(200).send(adds);
   } catch (error) {
     res.status(401).send({
