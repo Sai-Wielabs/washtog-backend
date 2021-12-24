@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "Washtog",
-    "description": "My User Project Application API"
+    "version": "2.0.0",
+    "title": "Washtog Api Documentation",
+    "description": "Washtog Documentation for API routes"
   },
-  "host": "localhost:2323",
+  "host": "http://localhost:2323",
   "basePath": "/",
   "tags": [
     {
@@ -18,6 +18,33 @@
   "produces": ["application/json"],
 
   "paths": {
+    "/api/v1/registerUser": {
+      "post": {
+        "tags": ["Register User"]
+      },
+      "parameters" :[
+        {
+          "$ref" : "#/definitions/parameters"
+        }
+      ],
+      "summary": "Register user with the washtog application",
+      "responses": {
+        "200": {
+          "ststus": "OK",
+          "schema": {
+            "$ref": "#/definitions/registerUser"
+          }
+        },
+        "400": {
+          "status": "FAIL",
+          "message": "Bad Request"
+        },
+        "500": {
+          "status": "FAIL",
+          "message": "Internal Servce Error"
+        }
+      }
+    },
     "/api/v1/reviews/getReviews": {
       "get": {
         "tags": ["Reviews"],
@@ -51,6 +78,37 @@
     }
   },
   "definitions": {
+    "parameters": {
+      "username": {
+        "name": "username",
+        "description": "Username to use for login.",
+        "in": "formData",
+        "required": true,
+        "type": "string"
+      }
+    },
+    "registerUser": {
+      "required": ["phoneNumber", "uId"],
+      "parameters": [
+        {
+          "username": {
+            "name": "username",
+            "description": "Username to use for login.",
+            "in": "body",
+            "required": true,
+            "type": "string"
+          }
+        }
+      ],
+      "properties": {
+        "phoneNumber": {
+          "type": "string"
+        },
+        "uId": {
+          "type": "string"
+        }
+      }
+    },
     "reviews": {
       "required": ["service_id", "posted_by", "rating"],
       "properties": {
@@ -63,7 +121,7 @@
           "type": "string"
         },
         "user_image_url": {
-          "type": "String"
+          "type": "string"
         },
         "rating": {
           "type": "string"
@@ -77,7 +135,6 @@
           "name": "user",
           "in": "body",
           "description": "User that we want to create"
-          
         }
       ]
     }

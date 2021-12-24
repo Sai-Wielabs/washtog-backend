@@ -4,11 +4,13 @@ const mongoose = require("mongoose");
 
 const registerValidate = (req,res,next) => {
     console.log("middleware called")
+    console.log(req.body)
+    
 
     if(!req.body){
         return res.status(400).send({
             status:"fail",
-            message:"please check your request!",
+            message:"Bad request",
             content:null
         })
     }

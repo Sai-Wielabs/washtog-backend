@@ -3,7 +3,10 @@ const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
+
+//swagger
 const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 
 //routes
 const userRoute = require("../Washtog_backend/routes/user");
@@ -13,22 +16,33 @@ const serviceRoute = require("../Washtog_backend/routes/services");
 const addsRouter = require("../Washtog_backend/routes/adds");
 
 const docs = require("../Washtog_backend/docs");
-swaggerDocument = require("./swagger.json");
+const joi = require("joi");
 
 //config env
 require("dotenv").config();
 
-//Connect to DB
+swaggerDocument = require("./swagger.json");
 
-let dbURI = process.env.DB_CONNECTION_DEV;
-// if (process.env.NODE_ENV === "development") {
-//   dbURI = process.env.DB_CONNECTION_DEV;
-// }
-// if (process.env.NODE_ENV === "production") {
-//   dbURI = process.env.DB_CONNECTION_PROD;
-// }
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "Washtog Api",
+      description: "Washtog Api Documentation",
+      contact: {
+        name: "Wielabs.com",
+      },
+      servers: ["https://localhost:2323"],
+    },
+  },
+  apis: ["app.js", ".routes/*.js"],
+};
+
+const swaggerDoc = swaggerJsDoc(swaggerOptions);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+//Connect to DB
+let dbURI = process.env.DB_CONNECTION_DEV;
 
 mongoose.connect(
   dbURI,
