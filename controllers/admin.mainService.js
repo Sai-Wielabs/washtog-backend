@@ -1,6 +1,6 @@
 const MainServicesSchema = require("../models/Services/mainServices");
 const FloorScrubbingSchema = require("../models/Services/floorScrubbing");
-const CustomPackage = require("../models/Services/custom");
+const CustomPackage = require("../models/Services/main.customPackage");
 
 const addMainService = async (req, res) => {
   try {
@@ -71,7 +71,7 @@ const getServices = async (req, res) => {
 
 const getAllservices = async(req,res) => {
   try {
-    const services = await MainServicesSchema.find();
+    const services = await CustomPackage.find();
     console.log(services);
     if(services){
       return res.status(200).send(services);

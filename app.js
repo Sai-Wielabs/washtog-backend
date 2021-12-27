@@ -42,7 +42,7 @@ const swaggerDoc = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 //Connect to DB
-let dbURI = process.env.DB_CONNECTION_DEV;
+let dbURI = process.env.PROD_MONGO_URI;
 
 mongoose.connect(
   dbURI,
@@ -66,7 +66,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use("/api/v1", userRoute);
 app.use("/api/v1/reviews", reviewsRoute);
 app.use("/api/v1/popularItems", popularItemsRoute);
-app.use("/api/v1/services/", serviceRoute);
+app.use("/api/v1/services", serviceRoute);
 app.use("/api/v1/adds", addsRouter);
 
 app.get("/api/v1/getReviews", (req, res) => {

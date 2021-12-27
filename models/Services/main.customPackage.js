@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const mainServiceSchema = new Schema({
+const customPackage = new Schema({
   imageUrl: String,
   videoUrl : String,
   title: {
@@ -16,9 +16,9 @@ const mainServiceSchema = new Schema({
 
 });
 
-const MainServicesSchema = mongoose.model(
-  "MainServicesSchema",
-  mainServiceSchema
+const CustomPackage = mongoose.model(
+  "CustomPackage",
+  customPackage
 );
 
-module.exports = MainServicesSchema;
+module.exports = CustomPackage;
