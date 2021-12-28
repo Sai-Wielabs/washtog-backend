@@ -13,7 +13,11 @@ const reviewsSchema = new Schema({
     minlength: 1,
     required: true,
   },
-  orderId: {
+  serviceId: {
+    type: String,
+    required: true,
+  },
+  categoryId: {
     type: String,
     required: true,
   },
@@ -21,7 +25,6 @@ const reviewsSchema = new Schema({
     type: String,
     required: true,
   },
-  imgUrl: String,
   postedBy: {
     type: String,
     required: true,
