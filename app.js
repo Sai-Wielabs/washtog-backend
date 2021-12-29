@@ -14,6 +14,7 @@ const popularItemsRoute = require("../Washtog_backend/routes/popularItems");
 const reviewsRoute = require("../Washtog_backend/routes/reviews");
 const serviceRoute = require("../Washtog_backend/routes/services");
 const addsRouter = require("../Washtog_backend/routes/adds");
+const dryCleaningService = require("../Washtog_backend/routes/Services/dryCleaningService")
 
 const docs = require("../Washtog_backend/docs");
 const joi = require("joi");
@@ -68,6 +69,9 @@ app.use("/api/v1/reviews", reviewsRoute);
 app.use("/api/v1/popularItems", popularItemsRoute);
 app.use("/api/v1/services", serviceRoute);
 app.use("/api/v1/adds", addsRouter);
+
+//services routes
+app.use("/api/v1/services",dryCleaningService)
 
 app.get("/api/v1/getReviews", (req, res) => {
   console.log(req.headers.authorization);

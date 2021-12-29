@@ -8,6 +8,7 @@ const getCustomPackagesSubService = async (req, res) => {
 
     if (await CustomPackage.findById(mainServiceId)) {
       const mainService = await CustomPackage.findById(mainServiceId);
+      console.log(mainService);
       const subServices = await BathroomDeepCleaning.find({
         _id: {
           $in: mainService["servicesOffered"],
