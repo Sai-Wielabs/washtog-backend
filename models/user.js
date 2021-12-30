@@ -15,7 +15,11 @@ const userSchema = new Schema({
   addresses: [
 
   ],
-  flatNo: String,
+  
+  bookings: {
+    type : Array,
+    required : true,
+  },
 });
 
 
